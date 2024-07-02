@@ -1,4 +1,4 @@
 export class MenuLinks {
-    static readonly WEB_PROCESSOR = 'webprocessor';
+    static readonly WEB_SCRAPING = 'webscraping';
     static readonly MEDIA_GALLERY = 'mediagallery';
 }

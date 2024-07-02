@@ -1,13 +1,28 @@
 import React, { useState } from 'react';
-import { TextField, Button, Container, Typography } from '@material-ui/core';
+import { TextField, Button, Container, Typography, Box } from '@material-ui/core';
 import { login } from '../services/authService';
-import {User} from "../models/User";
-import {toastUtil} from "../utils/toastUtil";
-import {ToastContainer} from "react-toastify";
+import { User } from "../models/User";
+import { toastUtil } from "../utils/toastUtil";
+import { ToastContainer } from "react-toastify";
+import styled from 'styled-components';
 
 interface LoginProps {
     onLogin: (token: string, user: User | null) => void;
 }
+
+const CenteredContainer = styled(Container)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  text-align: center;
+  margin-top: 80px;
+`;
+
+const Title = styled(Typography)`
+  margin-bottom: 40px !important;
+`;
 
 const Login: React.FC<LoginProps> = ({ onLogin }) => {
     const [username, setUsername] = useState('');
@@ -15,7 +30,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
-        const {token, user} = await login(username, password);
+        const { token, user } = await login(username, password);
         if (token != null) {
             onLogin(token, user);
         } else {
@@ -24,9 +39,10 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
     };
 
     return (
-        <Container maxWidth="xs">
+        <CenteredContainer maxWidth="xs">
             <ToastContainer position="top-right" autoClose={3000} />
-            <Typography variant="h4" align="center">Login</Typography>
+            <Title variant="h4">Simple Web Scraper</Title>
+
             <form onSubmit={handleLogin}>
                 <TextField
                     variant="outlined"
@@ -56,7 +72,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
                     Login
                 </Button>
             </form>
-        </Container>
+        </CenteredContainer>
     );
 };
 

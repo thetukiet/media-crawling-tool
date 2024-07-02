@@ -37,7 +37,7 @@ const Home: React.FC<HomeProps> = ({ onLogout, user }) => {
                 backgroundColor: '#2c3e50',
                 color: 'white',
             }}>
-                <h2 style={{ margin: 0 }}>Media Crawling Helper</h2>
+                <h2 style={{ margin: 0 }}>Simple Web Scraper</h2>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                     <span style={{ marginRight: '10px' }}>{user?.fullName}</span>
                     <FaUser style={{ marginRight: '10px' }} />
@@ -87,18 +87,18 @@ const Home: React.FC<HomeProps> = ({ onLogout, user }) => {
                             </li>
                             <li>
                                 <Link
-                                    to={"/home/" + MenuLinks.WEB_PROCESSOR}
-                                    onClick={() => setActiveMenu(MenuLinks.WEB_PROCESSOR)}
+                                    to={"/home/" + MenuLinks.WEB_SCRAPING}
+                                    onClick={() => setActiveMenu(MenuLinks.WEB_SCRAPING)}
                                     style={{
                                         display: 'block',
                                         padding: '10px 20px',
-                                        color: activeMenu === MenuLinks.WEB_PROCESSOR ? '#3498db' : 'white',
-                                        backgroundColor: activeMenu === MenuLinks.WEB_PROCESSOR ? '#2c3e50' : 'transparent',
+                                        color: activeMenu === MenuLinks.WEB_SCRAPING ? '#3498db' : 'white',
+                                        backgroundColor: activeMenu === MenuLinks.WEB_SCRAPING ? '#2c3e50' : 'transparent',
                                         textDecoration: 'none',
                                         transition: 'background-color 0.3s',
                                     }}
                                 >
-                                    Web Processor
+                                    Web Scraping
                                 </Link>
                             </li>
                         </ul>
@@ -112,5 +112,6 @@ const Home: React.FC<HomeProps> = ({ onLogout, user }) => {
         </div>
     );
 };
+
 
 export default Home;

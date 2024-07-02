@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import Home from './components/Home';
 import Login from './components/Login';
 import {User} from "./models/User";
-import WebProcessor from "./components/WebProcessor";
-import MediaGallery from "./components/MediaGallery";
+import WebScraping from "./components/WebScraping";
+import MediaGallery from "./components/MediaGallery/MediaGallery";
 import {MenuLinks} from "./constants/menuConstants";
 
 const App: React.FC = () => {
@@ -45,8 +45,8 @@ const App: React.FC = () => {
                 <Route path="/home" element={
                     isAuthenticated ? <Home onLogout={logout} user = {user} /> : <Navigate to="/login" />
                 }>
-                    <Route index element={<h2>Welcome to Media Crawling Helper</h2>} />
-                    <Route path={MenuLinks.WEB_PROCESSOR} element={<WebProcessor />} />
+                    <Route index element={<h2>Welcome to Media Scraper</h2>} />
+                    <Route path={MenuLinks.WEB_SCRAPING} element={<WebScraping />} />
                     <Route path={MenuLinks.MEDIA_GALLERY} element={<MediaGallery />} />
                 </Route>
 

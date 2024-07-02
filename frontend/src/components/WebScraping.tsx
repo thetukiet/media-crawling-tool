@@ -4,7 +4,7 @@ import {toastUtil} from "../utils/toastUtil";
 import {processWebUrls} from "../services/mediaLinkService";
 import LoadingOverlay from "./LoadingoverLay";
 
-const WebProcessor: React.FC = () => {
+const WebScraping: React.FC = () => {
     const [urls, setUrls] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
@@ -42,7 +42,7 @@ const WebProcessor: React.FC = () => {
     return (
         <div>
             {isLoading && <LoadingOverlay />}
-            <Typography variant="h5">Crawling Images And Video From Web URLs</Typography>
+            <Typography variant="h5">Scraping Images And Video From Web URLs</Typography>
             <form onSubmit={handleSubmit}>
                 <TextField
                     multiline
@@ -62,4 +62,4 @@ const WebProcessor: React.FC = () => {
     );
 };
 
-export default WebProcessor;
+export default WebScraping;
