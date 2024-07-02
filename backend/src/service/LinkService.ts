@@ -74,7 +74,7 @@ export class LinkService {
                         const absoluteUrl = resolveUrl(src);
                         const alt = img.getAttribute('alt') || '';
                         const title = img.getAttribute('title') || alt || 'Untitled Image';
-                        // TODO: try get thumbnail
+                        // TODO: Search for thumbnail
                         links.push({ url: absoluteUrl, title, type: 'image'});
                     }
                 });
@@ -85,6 +85,7 @@ export class LinkService {
                     if (src) {
                         const absoluteUrl = resolveUrl(src);
                         const title = video.getAttribute('title') || video.querySelector('track[kind="captions"]')?.getAttribute('label') || 'Untitled Video';
+                        // TODO: Still have some issue
                         //const thumbnail = ThumbnailUtil.generateThumbnailBase64(absoluteUrl);
                         links.push({ url: absoluteUrl, title, type: 'video' });
                     }
@@ -97,6 +98,7 @@ export class LinkService {
                         const absoluteUrl = resolveUrl(src);
                         const title = iframe.getAttribute('title') || 'Embedded Content';
                         if (absoluteUrl.includes('youtube.com') || absoluteUrl.includes('vimeo.com')) {
+                            // TODO: Search for thumbnail
                             links.push({ url: absoluteUrl, title, type: 'video' });
                         }
                     }
