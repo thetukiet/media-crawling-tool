@@ -1,6 +1,6 @@
 import api from './api';
-import {MediaLink} from "../modals/MediaLink";
-import {Paging} from "../modals/Paging";
+import {MediaLink} from "../models/MediaLink";
+import {Paging} from "../models/Paging";
 import {ApiEndpoints} from "../constants/apiConstants";
 
 interface FetchLinksResponse {
@@ -13,10 +13,10 @@ interface ProcessLinksResponse {
     links: MediaLink[];
 }
 
-export const fetchMediaLinks = async (pageSize: number, pageIndex: number): Promise<{links: MediaLink[], paging: Paging | null}> => {
+export const fetchMediaLinks = async (pageSize: number, pageIndex: number, type: string | null): Promise<{links: MediaLink[], paging: Paging | null}> => {
     try {
         const response = await api.get<FetchLinksResponse>(ApiEndpoints.LINKS, {
-            params: { pageSize, pageIndex },
+            params: { pageSize, pageIndex, type },
         });
         const {data, meta} = response.data;
         return {links: data, paging: meta};

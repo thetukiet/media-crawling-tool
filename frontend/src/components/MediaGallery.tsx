@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogTitle } from '@mui/material';
 import { Pagination, Select, MenuItem, SelectChangeEvent } from '@mui/material';
 import styled from 'styled-components';
-import {fetchMediaLinks} from "../services/mediaLinkService";
-import {MediaLink} from "../modals/MediaLink";
+import { fetchMediaLinks } from "../services/mediaLinkService";
+import { MediaLink } from "../models/MediaLink";
 import ReactPlayer from 'react-player';
 
 const MediaLinksGrid = styled.div`
@@ -24,19 +24,6 @@ const MediaLinkItem = styled.div<{ type: 'image' | 'video' }>`
 
   &:hover {
     transform: scale(1.05);
-  }
-
-  &::before {
-    content: '▶';
-    position: absolute;
-    top: 8px;
-    left: 8px;
-    background-color: rgba(0, 0, 0, 0.6);
-    color: white;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 16px;
-    visibility: ${props => props.type === 'video' ? 'visible' : 'hidden'};
   }
 `;
 
@@ -67,6 +54,39 @@ const ControlsContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 16px;
+  margin-bottom: 16px;
+`;
+
+const LeftControls = styled.div`
+  display: flex;
+  gap: 16px;
+`;
+
+const DialogImageWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 500px;
+`;
+
+const DialogImage = styled.img`
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+`;
+
+const DialogVideoWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  max-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const DialogVideo = styled(ReactPlayer)`
+  max-width: 100%;
+  max-height: 100%;
 `;
 
 const MediaGallery: React.FC = () => {
@@ -75,14 +95,16 @@ const MediaGallery: React.FC = () => {
     const [page, setPage] = useState(1);
     const [pageSize, setPageSize] = useState(20);
     const [selectedLink, setSelectedLink] = useState<MediaLink | null>(null);
+    const [mediaType, setMediaType] = useState<'All' | 'Image' | 'Video'>('All');
 
     useEffect(() => {
         fetchLinks();
-    }, [page, pageSize]);
+    }, [page, pageSize, mediaType]);
 
     const fetchLinks = async () => {
         try {
-            const {links, paging} = await fetchMediaLinks(pageSize, page);
+            const type = mediaType === 'All' ? null : mediaType.toLowerCase();
+            const { links, paging } = await fetchMediaLinks(pageSize, page, type);
             let totalPages = paging == null ? 0 : paging.totalPages;
             setLinks(links);
             setTotalPages(totalPages);
@@ -108,47 +130,96 @@ const MediaGallery: React.FC = () => {
         setPage(1);
     };
 
+    const handleMediaTypeChange = (event: SelectChangeEvent<'All' | 'Image' | 'Video'>) => {
+        setMediaType(event.target.value as 'All' | 'Image' | 'Video');
+        setPage(1);
+    };
+
+    const renderThumbnail = (link: MediaLink) => {
+        if (link.type === 'video') {
+            if(link.thumbnail){
+                return (
+                    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                        <MediaLinkImage src={link.thumbnail} alt={link.title} />
+                        <span
+                            style={{
+                                position: 'absolute',
+                                top: '8px',
+                                left: '8px',
+                                backgroundColor: 'rgba(0, 0, 0, 0.6)',
+                                color: 'white',
+                                padding: '4px 8px',
+                                borderRadius: '4px',
+                                fontSize: '16px',
+                            }}
+                        >
+              ▶
+            </span>
+                    </div>
+                );
+            } else {
+                return <MediaLinkImage src="/video-placeholder.svg" alt={link.title} />;
+            }
+        } else {
+            if(link.thumbnail) {
+                return <MediaLinkImage src={link.thumbnail} alt={link.title}/>;
+            } else{
+                return <MediaLinkImage src={link.mediaUrl} alt={link.title}/>;
+            }
+        }
+    };
+
     return (
         <div>
+            <ControlsContainer>
+                <LeftControls>
+                    <Select value={pageSize} onChange={handlePageSizeChange}>
+                        <MenuItem value={20}>20 per page</MenuItem>
+                        <MenuItem value={30}>30 per page</MenuItem>
+                        <MenuItem value={50}>50 per page</MenuItem>
+                    </Select>
+                    <Select value={mediaType} onChange={handleMediaTypeChange}>
+                        <MenuItem value="All">All</MenuItem>
+                        <MenuItem value="Image">Image</MenuItem>
+                        <MenuItem value="Video">Video</MenuItem>
+                    </Select>
+                </LeftControls>
+                <Pagination count={totalPages} page={page} onChange={handlePageChange} />
+            </ControlsContainer>
+
             <MediaLinksGrid>
                 {links.map((link) => (
                     <MediaLinkItem key={link.id} type={link.type} onClick={() => handleLinkClick(link)}>
-                        <MediaLinkImage src={link.mediaUrl} alt={link.title} />
+                        {renderThumbnail(link)}
                         <MediaLinkTitle>{link.title}</MediaLinkTitle>
                     </MediaLinkItem>
                 ))}
             </MediaLinksGrid>
 
-            <ControlsContainer>
-                <Select
-                    value={pageSize}
-                    onChange={handlePageSizeChange}
-                >
-                    <MenuItem value={20}>20 per page</MenuItem>
-                    <MenuItem value={30}>30 per page</MenuItem>
-                    <MenuItem value={50}>50 per page</MenuItem>
-                </Select>
-                <Pagination count={totalPages} page={page} onChange={handlePageChange} />
-            </ControlsContainer>
-
-            <Dialog open={!!selectedLink} onClose={handleCloseDialog}>
+            <Dialog open={!!selectedLink} onClose={handleCloseDialog} maxWidth="lg" fullWidth>
                 <DialogTitle>{selectedLink?.title}</DialogTitle>
                 <DialogContent>
                     {selectedLink?.type === 'image' ? (
-                        <img src={selectedLink.mediaUrl} alt={selectedLink.title} style={{ maxWidth: '100%' }} />
+                        <DialogImageWrapper>
+                            <DialogImage src={selectedLink.mediaUrl} alt={selectedLink.title} />
+                        </DialogImageWrapper>
                     ) : (
-                        <ReactPlayer
-                        url={selectedLink?.mediaUrl}
-                        controls={true}
-                        width="100%"
-                        height="auto"
-                        playing={false}
-                        config={{
-                            file: {
-                                forceHLS: true,
-                            }
-                        }}
-                        />
+                        <DialogVideoWrapper>
+                            <DialogVideo
+                                url={selectedLink?.mediaUrl}
+                                controls={true}
+                                width="100%"
+                                height="auto"
+                                playing={false}
+                                config={{
+                                    file: {
+                                        attributes: {
+                                            controlsList: 'nodownload'  // Prevent downloading
+                                        }
+                                    }
+                                }}
+                            />
+                        </DialogVideoWrapper>
                     )}
                 </DialogContent>
             </Dialog>
@@ -157,4 +228,3 @@ const MediaGallery: React.FC = () => {
 };
 
 export default MediaGallery;
-// TODO: Optimize UI

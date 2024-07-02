@@ -21,11 +21,12 @@
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."links";
 CREATE TABLE "public"."links" (
-  "web_url" varchar(500) COLLATE "pg_catalog"."default",
+  "id" uuid NOT NULL DEFAULT gen_random_uuid(),
+  "web_url" varchar(1000) COLLATE "pg_catalog"."default",
   "media_url" text COLLATE "pg_catalog"."default",
+  "thumbnail" text COLLATE "pg_catalog"."default",
   "type" varchar(50) COLLATE "pg_catalog"."default",
-  "title" varchar(500) COLLATE "pg_catalog"."default",
-  "id" uuid NOT NULL DEFAULT gen_random_uuid()
+  "title" varchar(500) COLLATE "pg_catalog"."default"
 )
 ;
 ALTER TABLE "public"."links" OWNER TO "admin";

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TextField, Button, Container, Typography } from '@material-ui/core';
 import { login } from '../services/authService';
-import {User} from "../modals/User";
+import {User} from "../models/User";
 import {toastUtil} from "../utils/toastUtil";
 import {ToastContainer} from "react-toastify";
 

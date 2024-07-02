@@ -11,6 +11,9 @@ export class LinkResponse {
     mediaUrl: string;
 
     @Expose()
+    thumbnail: string;
+
+    @Expose()
     title: string;
 
     @Expose()

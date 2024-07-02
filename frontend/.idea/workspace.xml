@@ -1,7 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dad2aa58-e511-4e21-8649-4168c352d818" name="Changes" comment="" />
+    <list default="true" id="dad2aa58-e511-4e21-8649-4168c352d818" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../backend/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/src/utils/ThumbnailUtil.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/video-placeholder.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/videoThumbnail.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/controller/LinkController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/controller/LinkController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/entity/Link.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/entity/Link.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/payload/response/LinkResponse.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/payload/response/LinkResponse.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/repository/LinkRepository.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/repository/LinkRepository.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/service/LinkService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/service/LinkService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../deploy/db-scripts/01_create_tables.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../deploy/db-scripts/01_create_tables.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Home.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/MediaGallery.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MediaGallery.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/WebProcessor.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/WebProcessor.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modals/MediaLink.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/MediaLink.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modals/Paging.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Paging.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modals/User.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/User.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/authService.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/authService.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/mediaLinkService.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/mediaLinkService.tsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,10 +41,16 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2iX8jqAwd5c1ighkcJ5iUZuLnQE" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
@@ -27,10 +59,10 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/admin/Projects/2024/media-collection/frontend",
+    "last_opened_file_path": "/Users/admin/Projects/2024/media-crawling-tool/frontend",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "preferences.keymap",
-    "ts.external.directory.path": "/Users/admin/Projects/2024/media-collection/frontend/node_modules/typescript/lib",
+    "ts.external.directory.path": "/Users/admin/Projects/2024/media-crawling-tool/frontend/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -43,6 +75,7 @@
       <recent name="$PROJECT_DIR$/src" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public" />
       <recent name="$PROJECT_DIR$/src/routing" />
     </key>
   </component>
@@ -59,10 +92,22 @@
       <workItem from="1719650690046" duration="29457000" />
       <workItem from="1719788408594" duration="1980000" />
       <workItem from="1719796701264" duration="3287000" />
+      <workItem from="1719842744588" duration="10757000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

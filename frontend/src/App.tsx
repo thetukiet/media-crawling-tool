@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Home from './components/Home';
 import Login from './components/Login';
-import {User} from "./modals/User";
+import {User} from "./models/User";
 import WebProcessor from "./components/WebProcessor";
 import MediaGallery from "./components/MediaGallery";
 import {MenuLinks} from "./constants/menuConstants";

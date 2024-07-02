@@ -23,7 +23,12 @@ const WebProcessor: React.FC = () => {
             if (links === null) {
                 toastUtil.error("Error occurs while processing the input web URLs");
             } else {
-                toastUtil.success('Web URLs processed successfully. New found links: ' + links.length);
+                if(links.length < 1){
+                    toastUtil.info('No media link found');
+                }else{
+                    toastUtil.success('Web URLs processed successfully. New found links: ' + links.length);
+                }
+
                 setUrls('');
             }
         } catch (error) {

@@ -13,11 +13,17 @@ export class LinkRepository {
         return this.repository.save(link);
     }
 
-    async findAll(page: number, limit: number): Promise<[Link[], number]> {
-        return this.repository.findAndCount({
-            skip: (page - 1) * limit,
-            take: limit,
-        });
+    async findAll(page: number, limit: number, type: string | null): Promise<[Link[], number]> {
+        const queryBuilder = this.repository.createQueryBuilder("link");
+
+        if (type) {
+            queryBuilder.where("link.type = :type", { type });
+        }
+
+        return queryBuilder
+            .skip((page - 1) * limit)
+            .take(limit)
+            .getManyAndCount();
     }
 
     async deleteByWebUrl(webUrl: string): Promise<void> {

@@ -1,6 +1,6 @@
 import api from './api';
 import {ApiEndpoints} from "../constants/apiConstants";
-import {User} from "../modals/User";
+import {User} from "../models/User";
 
 export const login = async (username: string, password: string): Promise<{token: string | null, user: User | null}> => {
     try {

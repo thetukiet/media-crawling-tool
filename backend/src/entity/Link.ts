@@ -12,6 +12,9 @@ export class Link {
     mediaUrl: string;
 
     @Column()
+    thumbnail: string;
+
+    @Column()
     title: string;
 
     @Column()

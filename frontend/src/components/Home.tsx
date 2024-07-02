@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Link, Outlet, useLocation, useNavigate} from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {User} from "../modals/User";
+import {User} from "../models/User";
 import {MenuLinks} from "../constants/menuConstants";
 import { FaUser, FaSignOutAlt } from 'react-icons/fa';
 
