@@ -49,13 +49,15 @@ https://coucousuzette.com/en/collections/kids
 --------------------------------
 ## TODO Stuff
 #### For Backend
-1. Implement Authentication, real user login
-2. Using JWT token instead of Basic Authentication
-3. Generate thumbnail image for video
-4. Improve performance
+1. Apply process pool for large amount of Web URLs
+2. Implement Authentication, real user login
+3. Using JWT token instead of Basic Authentication
+4. Generate thumbnail image for video
+5. Improve performance
    
 #### For Frontend
-1. Improve preview dialog 
-2. Apply thumbnail image for video
+1. Apply isomorphic approach
+2. Improve preview dialog 
+3. Apply thumbnail image for video
 
  
