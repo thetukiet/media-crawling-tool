@@ -41,7 +41,7 @@ password: MyPass
 ## Testing Web URLs
 There are some cool Web URLs for testing
 ```
-https://www.pexels.com/search/videos/
+https://www.pexels.com/search/videos/computer/
 https://www.scienceofpeople.com/
 https://coucousuzette.com/en/collections/kids
 ```
