@@ -13,11 +13,20 @@ export class LinkRepository {
         return this.repository.save(link);
     }
 
-    async findAll(page: number, limit: number, type: string | null): Promise<[Link[], number]> {
+    async findAll(page: number, limit: number, type: string | null, searchText: string | null): Promise<[Link[], number]> {
         const queryBuilder = this.repository.createQueryBuilder("link");
 
         if (type) {
-            queryBuilder.where("link.type = :type", { type });
+            queryBuilder.andWhere("link.type = :type", { type });
+        }
+
+        if (searchText && searchText.trim() !== '') {
+            queryBuilder.andWhere(
+                "(LOWER(link.webUrl) LIKE LOWER(:searchText) OR " +
+                "LOWER(link.mediaUrl) LIKE LOWER(:searchText) OR " +
+                "LOWER(link.title) LIKE LOWER(:searchText))",
+                { searchText: `%${searchText.trim()}%` }
+            );
         }
 
         return queryBuilder

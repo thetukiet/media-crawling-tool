@@ -1,49 +1,61 @@
-# Candidate Management
+# Simple Web Scraper
 
 ### Tech-stack
-- Backend: Asp.NET Core WebAPI with .NET 8
-- Frontend: Angular 17, using TaigaUI
-- Database: MongoDB
+- Backend: NodeJs - TypeScript
+- Frontend: ReactJs - TypeScript
+- Database: Postgres
+- Node v.18
 
-![Main Screenshot](./images/main-screenshot.png)
+![Main Screenshot](./assets/main-screenshot.png)
 
-## Step to setup
-1. Goto folder `backend` run the following command to create the database instance and init default collections
+## SourceCode Structure
 ```
-docker-compose up --build
-```
-
-It is supposed that the docker-compose file will build and setup the Backend web API instance also. I will update the script late on
-
-2. Open and Run the Backend project
-
-3. Go to folder `frontend` open it and run the  Angular script in the `README` file inside that folder
-4. Please make sure you have Node version.18 on your machine. Use this command to switch to it before building the code
-```
-nvm use 18
+|-- backend 
+|-- frontend
+|-- assets   // ReadMe resource files
+|-- deploy
+|   |-- db-scripts
+|   |-- docker-compose.yml
+|   |-- .env
+|   |-- setup.sh
 ```
 
-## Account for test
-After you setup the database successfully. You can use this account to login at the Login page on Frontend Web
+## Setup And Run
+[Watch the video](./assets/running-demo.mov)
+1. Goto folder `deploy`, open .env file to edit database creation parameters. Then open Terminal at that folder and run following command
 ```
-username: dev@gmail.com
-password: Password12!@
+sh setup.sh
+```
+2. Goto Docker and check if the all 3 instances started successfully or not. If yes, then you can start using it at
+```
+http:\\localhost:3001
+```
+3. Port config. You can change the port of Backend and Frontend images in the file `docker-compose.yml`
+
+## Account for login
+This account is hard-coded in backend repository, not database
+```
+username: admin
+password: MyPass
+```
+## Testing Web URLs
+There are some cool Web URLs for testing
+```
+https://www.pexels.com/search/videos/
+https://www.scienceofpeople.com/
+https://coucousuzette.com/en/collections/kids
 ```
 
 --------------------------------
-## Things I can do better
+## TODO Stuff
 #### For Backend
-1. Apply FluentValidation
-2. Apply AutoMapper
-3. Apply CQRS approach using MediatR
-4. Apply C# 12 structure
+1. Implement Authentication, real user login
+2. Using JWT token instead of Basic Authentication
+3. Generate thumbnail image for video
+4. Improve performance
    
 #### For Frontend
-1. Fix font-size issue of TaigaUI input components
-2. Optimize UX of the Drag/Drop stuff
+1. Improve preview dialog 
+2. Apply thumbnail image for video
 
-
----
-#### Reference And License
-As I take some reference from other Github repositories, so just feel free to get my code.
-And please give me a ⭐ if you like this repo 😊. 
+ 

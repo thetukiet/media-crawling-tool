@@ -3,10 +3,8 @@ import { Link } from "../entity/Link";
 import { LinkResponse } from "../payload/response/LinkResponse";
 import { mapToArray } from "../utils/mapper";
 import puppeteer from 'puppeteer-extra';
-import {ThumbnailUtil} from "../utils/ThumbnailUtil";
+import chromeFinder from 'chrome-finder';
 
-const fs = require('fs');
-const path = require('path');
 
 export class LinkService {
     private linkRepository: LinkRepository;
@@ -15,8 +13,8 @@ export class LinkService {
         this.linkRepository = new LinkRepository();
     }
 
-    async getLinks(pageIndex: number, pageSize: number, type: string | null): Promise<{ links: LinkResponse[]; total: number }> {
-        const [links, total] = await this.linkRepository.findAll(pageIndex, pageSize, type);
+    async getLinks(pageIndex: number, pageSize: number, type: string | null, searchText: string | null): Promise<{ links: LinkResponse[]; total: number }> {
+        const [links, total] = await this.linkRepository.findAll(pageIndex, pageSize, type, searchText);
         return {
             links: mapToArray(LinkResponse, links),
             total
@@ -49,7 +47,17 @@ export class LinkService {
     private async extractMediaLinks(webUrl: string): Promise<Array<{ url: string; title: string; type: string; thumbnail: string }>> {
         let browser;
         try {
-            browser = await puppeteer.launch({ headless: true });
+            const executablePath = process.env.PUPPETEER_EXECUTABLE_PATH || '/usr/bin/chromium'
+            if(executablePath === 'default'){
+                browser = await puppeteer.launch({executablePath: chromeFinder(),});
+            } else{
+                browser = await puppeteer.launch({
+                    executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || '/usr/bin/chromium',
+                    headless: true,
+                    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+                });
+            }
+
             const page = await browser.newPage();
 
             await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36');
@@ -57,11 +65,11 @@ export class LinkService {
 
             await page.goto(webUrl, {
                 waitUntil: 'networkidle2',
-                timeout: 60000
+                timeout: 30000
             });
 
             // Wait until the images and videos displayed
-            await page.waitForSelector('img, video, iframe', { timeout: 60000 });
+            await page.waitForSelector('img, video, iframe', { timeout: 30000 });
 
             const mediaLinks: Array<{ url: string; title: string; type: string }> = await page.evaluate(() => {
                 const links: Array<{ url: string; title: string; type: string }> = [];
@@ -85,8 +93,7 @@ export class LinkService {
                     if (src) {
                         const absoluteUrl = resolveUrl(src);
                         const title = video.getAttribute('title') || video.querySelector('track[kind="captions"]')?.getAttribute('label') || 'Untitled Video';
-                        // TODO: Still have some issue
-                        //const thumbnail = ThumbnailUtil.generateThumbnailBase64(absoluteUrl);
+                        // TODO: Create thumbnail image
                         links.push({ url: absoluteUrl, title, type: 'video' });
                     }
                 });

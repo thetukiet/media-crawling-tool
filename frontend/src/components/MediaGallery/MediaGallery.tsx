@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Dialog, DialogContent, DialogTitle } from '@mui/material';
+import { Dialog, DialogContent, DialogTitle, TextField } from '@mui/material';
 import { Pagination, Select, MenuItem, SelectChangeEvent } from '@mui/material';
 import { fetchMediaLinks } from "../../services/mediaLinkService";
 import { MediaLink } from "../../models/MediaLink";
@@ -10,7 +10,7 @@ import {
     MediaLinkImage,
     MediaLinkTitle,
     ControlsContainer,
-    LeftControls,
+    GroupControls,
     DialogImageWrapper,
     DialogImage,
     DialogVideoWrapper,
@@ -24,15 +24,17 @@ const MediaGallery: React.FC = () => {
     const [pageSize, setPageSize] = useState(20);
     const [selectedLink, setSelectedLink] = useState<MediaLink | null>(null);
     const [mediaType, setMediaType] = useState<'All' | 'Image' | 'Video'>('All');
+    const [searchText, setSearchText] = useState<string>('');
 
     useEffect(() => {
         fetchLinks();
-    }, [page, pageSize, mediaType]);
+    }, [page, pageSize, mediaType, searchText]);
 
     const fetchLinks = async () => {
         try {
             const type = mediaType === 'All' ? null : mediaType.toLowerCase();
-            const { links, paging } = await fetchMediaLinks(pageSize, page, type);
+            const searchValue = searchText.trim() === '' ? null : searchText.trim();
+            const { links, paging } = await fetchMediaLinks(pageSize, page, type, searchValue);
             let totalPages = paging == null ? 0 : paging.totalPages;
             setLinks(links);
             setTotalPages(totalPages);
@@ -60,6 +62,11 @@ const MediaGallery: React.FC = () => {
 
     const handleMediaTypeChange = (event: SelectChangeEvent<'All' | 'Image' | 'Video'>) => {
         setMediaType(event.target.value as 'All' | 'Image' | 'Video');
+        setPage(1);
+    };
+
+    const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchText(event.target.value);
         setPage(1);
     };
 
@@ -100,19 +107,29 @@ const MediaGallery: React.FC = () => {
     return (
         <div>
             <ControlsContainer>
-                <LeftControls>
-                    <Select value={pageSize} onChange={handlePageSizeChange}>
-                        <MenuItem value={20}>20 per page</MenuItem>
-                        <MenuItem value={30}>30 per page</MenuItem>
-                        <MenuItem value={50}>50 per page</MenuItem>
-                    </Select>
+                <GroupControls>
+                    <TextField
+                        label="Search"
+                        variant="outlined"
+                        value={searchText}
+                        onChange={handleSearchChange}
+                        size="medium"
+                        style={{ marginRight: '10px', width: '300px' }}
+                    />
                     <Select value={mediaType} onChange={handleMediaTypeChange}>
                         <MenuItem value="All">All</MenuItem>
                         <MenuItem value="Image">Image</MenuItem>
                         <MenuItem value="Video">Video</MenuItem>
                     </Select>
-                </LeftControls>
-                <Pagination count={totalPages} page={page} onChange={handlePageChange} />
+                </GroupControls>
+                <GroupControls>
+                    <Pagination count={totalPages} page={page} onChange={handlePageChange} />
+                    <Select value={pageSize} onChange={handlePageSizeChange}>
+                        <MenuItem value={20}>20 per page</MenuItem>
+                        <MenuItem value={30}>30 per page</MenuItem>
+                        <MenuItem value={50}>50 per page</MenuItem>
+                    </Select>
+                </GroupControls>
             </ControlsContainer>
 
             <MediaLinksGrid>

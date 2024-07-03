@@ -52,9 +52,10 @@ export const ControlsContainer = styled.div`
   margin-bottom: 16px;
 `;
 
-export const LeftControls = styled.div`
+export const GroupControls = styled.div`
   display: flex;
   gap: 16px;
+  align-items: center;
 `;
 
 export const DialogImageWrapper = styled.div`

@@ -13,10 +13,10 @@ interface ProcessLinksResponse {
     links: MediaLink[];
 }
 
-export const fetchMediaLinks = async (pageSize: number, pageIndex: number, type: string | null): Promise<{links: MediaLink[], paging: Paging | null}> => {
+export const fetchMediaLinks = async (pageSize: number, pageIndex: number, type: string | null, searchText: string | null): Promise<{ links: MediaLink[]; paging: Paging | null }> => {
     try {
         const response = await api.get<FetchLinksResponse>(ApiEndpoints.LINKS, {
-            params: { pageSize, pageIndex, type },
+            params: { pageSize, pageIndex, type, searchText },
         });
         const {data, meta} = response.data;
         return {links: data, paging: meta};

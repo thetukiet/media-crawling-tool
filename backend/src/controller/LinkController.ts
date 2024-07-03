@@ -23,8 +23,9 @@ export class LinkController {
             const pageIndex = parseInt(req.query.pageIndex as string) || 1;
             const pageSize = parseInt(req.query.pageSize as string) || 10;
             const type = req.query.type as string || null;
+            const searchText = req.query.searchText as string || null;
 
-            const {links, total} = await this.linkService.getLinks(pageIndex, pageSize, type);
+            const {links, total} = await this.linkService.getLinks(pageIndex, pageSize, type, searchText);
 
             console.log(links);
             res.json({
