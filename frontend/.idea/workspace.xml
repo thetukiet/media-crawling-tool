@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dad2aa58-e511-4e21-8649-4168c352d818" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../backend/.env_template" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../deploy/.env_template" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.env_template" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

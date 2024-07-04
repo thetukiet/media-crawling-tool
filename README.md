@@ -23,7 +23,7 @@
 ```
 
 ## Correct .env Files
-There are 3 `.env_template` files totally `backend`, `frontend` and `deploy` folders. 
+There are 3 `.env_template` files totally in `backend`, `frontend` and `deploy` folders. 
 Rename them to `.env`, then change the parameter values like your desire. But please ensure that the values don't conflict with config in `docker-compose.yml` file
 
 ## Setup And Run

@@ -137,3 +137,4 @@ dist
 .pnp.*
 /frontend/.idea
 /frontend/.idea
+frontend/.idea/workspace.xml
