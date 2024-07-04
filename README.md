@@ -24,7 +24,8 @@
 
 ## Correct .env Files
 There are 3 `.env_template` files totally `backend`, `frontend` and `deploy` folders. 
-Rename them to `.env`, then change the parameter values like your desire. But please ensure that the values don't conflict with config in `docker-compose.yml` file 
+Rename them to `.env`, then change the parameter values like your desire. But please ensure that the values don't conflict with config in `docker-compose.yml` file
+
 ## Setup And Run
 [Watch the video](./assets/running-demo.mov)
 1. Goto folder `deploy`, open .env file to edit database creation parameters. Then open Terminal at that folder and run following command
@@ -43,6 +44,7 @@ This account is hard-coded in backend repository, not database
 username: admin
 password: MyPass
 ```
+
 ## Testing Web URLs
 There are some cool Web URLs for testing
 ```
